@@ -13,10 +13,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Stage clean extension files
+        run: |
+          mkdir -p ext_src
+          cp manifest.json background.js popup.html popup.css popup.js ext_src/
+
       - name: Convert WebExtension to Safari macOS App
         run: |
           mkdir -p build_out
-          xcrun safari-web-extension-converter . \
+          xcrun safari-web-extension-converter ext_src \
             --project-location build_out \
             --app-name "Tab Vault" \
             --bundle-identifier "io.github.sumana1004.tabvault" \
@@ -26,9 +31,11 @@ jobs:
 
       - name: Build Unsigned macOS App
         run: |
+          PROJ_PATH=$(find build_out -name "*.xcodeproj" | head -n 1)
+          echo "Found project at: $PROJ_PATH"
           xcodebuild \
-            -project "build_out/Tab Vault/Tab Vault.xcodeproj" \
-            -scheme "Tab Vault (macOS)" \
+            -project "$PROJ_PATH" \
+            -alltargets \
             -configuration Release \
             -derivedDataPath build_out/derived \
             CODE_SIGN_IDENTITY="" \
@@ -37,7 +44,10 @@ jobs:
 
       - name: Package App into Zip
         run: |
-          cd "build_out/derived/Build/Products/Release"
+          APP_PATH=$(find build_out/derived -name "Tab Vault.app" | head -n 1)
+          echo "Found app at: $APP_PATH"
+          APP_DIR=$(dirname "$APP_PATH")
+          cd "$APP_DIR"
           zip -r "$GITHUB_WORKSPACE/Tab-Vault-macOS-Safari.zip" "Tab Vault.app"
 
       - name: Upload Downloadable Safari App Artifact
