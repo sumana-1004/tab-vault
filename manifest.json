@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Vault",
+  "version": "1.0.0",
+  "description": "Never lose an important tab again. Automatically vaults closed tabs with instant search, pinning, and one-click restore.",
+  "permissions": ["tabs", "storage"],
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Open Tab Vault"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tab-vault@sumana-1004.github.io",
+      "strict_min_version": "109.0"
+    }
+  }
+}

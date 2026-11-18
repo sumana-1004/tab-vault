@@ -1,0 +1,116 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 380px;
+  max-height: 520px;
+  background: #0f1115;
+  color: #e4e4e7;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid #22252d;
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #818cf8; box-shadow: 0 0 8px #818cf8; }
+h1 { font-size: 15px; font-weight: 600; letter-spacing: 0.2px; }
+.actions { display: flex; gap: 6px; }
+.actions button {
+  background: #1b1e26;
+  color: #a1a1aa;
+  border: 1px solid #2a2e39;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.actions button:hover { color: #fff; border-color: #3f4454; }
+.controls { padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; }
+#searchInput {
+  width: 100%;
+  padding: 8px 11px;
+  border-radius: 8px;
+  border: 1px solid #272a34;
+  background: #171920;
+  color: #fff;
+  font-size: 12.5px;
+  outline: none;
+}
+#searchInput:focus { border-color: #818cf8; }
+.tabs-filter { display: flex; gap: 6px; }
+.filter-btn {
+  background: transparent;
+  color: #71717a;
+  border: none;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.filter-btn.active { background: #1e212b; color: #e4e4e7; }
+.tab-list {
+  padding: 0 16px 10px;
+  overflow-y: auto;
+  max-height: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.tab-card {
+  background: #161820;
+  border: 1px solid #22252e;
+  border-radius: 9px;
+  padding: 9px 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.15s;
+}
+.tab-card:hover { border-color: #383d4d; }
+.tab-meta { overflow: hidden; flex: 1; }
+.tab-title {
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f4f4f5;
+}
+.tab-sub { font-size: 10.5px; color: #71717a; margin-top: 3px; }
+.card-btns { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+.icon-btn {
+  background: transparent;
+  border: 1px solid #272a34;
+  color: #a1a1aa;
+  border-radius: 6px;
+  padding: 4px 7px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.icon-btn.pinned { color: #facc15; border-color: #854d0e; }
+.restore-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.restore-btn:hover { background: #4f46e5; }
+.empty { text-align: center; color: #71717a; font-size: 12px; padding: 30px 10px; }
+footer {
+  padding: 9px 16px;
+  border-top: 1px solid #22252d;
+  font-size: 10.5px;
+  color: #71717a;
+  display: flex;
+  justify-content: space-between;
+}
