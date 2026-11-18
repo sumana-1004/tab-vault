@@ -21,13 +21,14 @@ jobs:
       - name: Convert WebExtension to Safari macOS App
         run: |
           mkdir -p build_out
-          yes | xcrun safari-web-extension-converter ext_src \
+          xcrun safari-web-extension-converter \
             --project-location build_out \
             --app-name "Tab Vault" \
             --bundle-identifier "io.github.sumana1004.tabvault" \
             --macos-only \
             --no-open \
-            --force
+            --no-prompt \
+            ext_src
 
       - name: Build Unsigned macOS App
         run: |
