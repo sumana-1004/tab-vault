@@ -2,37 +2,51 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="color-scheme" content="dark" />
 		<title>Tab Vault</title>
 		<link rel="stylesheet" href="popup.css" />
 	</head>
 	<body>
 		<header>
-			<div class="brand">
+			<h1 class="brand">
 				<img
-					src="/icons/header-banner.png"
+					src="icons/header-banner.png"
 					alt="Tab Vault"
 					class="header-art"
+					draggable="false"
 				/>
-			</div>
+			</h1>
 			<div class="actions">
-				<button id="exportBtn" title="Export Vault as JSON">Export</button>
-				<button id="clearBtn" title="Clear unpinned tabs">Clear</button>
+				<button type="button" id="exportBtn" title="Export vault as JSON">
+					Export
+				</button>
+				<button type="button" id="clearBtn" title="Clear unpinned tabs">
+					Clear
+				</button>
 			</div>
 		</header>
+
 		<div class="controls">
 			<input
 				type="text"
 				id="searchInput"
-				placeholder="Search saved tabs by title or URL..."
+				placeholder="Search saved tabs by title or URL…"
+				aria-label="Search saved tabs"
+				autocomplete="off"
+				spellcheck="false"
 				autofocus
 			/>
-			<div class="tabs-filter">
-				<button class="filter-btn active" data-filter="all">All</button>
-				<button class="filter-btn" data-filter="pinned">Pinned</button>
+			<div class="tabs-filter" role="group" aria-label="Filter tabs">
+				<button type="button" class="filter-btn active" data-filter="all">
+					All
+				</button>
+				<button type="button" class="filter-btn" data-filter="pinned">
+					Pinned
+				</button>
 			</div>
 		</div>
 
-		<div id="tabList" class="tab-list"></div>
+		<main id="tabList" class="tab-list" aria-live="polite"></main>
 
 		<footer>
 			<span id="countLabel">0 tabs vaulted</span>

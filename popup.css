@@ -1,172 +1,386 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ==========================================================
+   Tab Vault: dark-academia / analog stationery
+   Image URLs in this file are relative to popup.css itself.
+   ========================================================== */
+
+:root {
+  --bg: #1c1815;
+  --bg-raised: #231e19;
+  --bg-card: #261f19;
+  --bg-well: #14100d;
+
+  --line: #4a3b2c;
+  --line-soft: #352b22;
+
+  --text: #eadfc8;
+  --text-strong: #f8f0df;
+  --muted: #a8967d;
+  --faint: #7f6e5a;
+
+  --brass: #b8843b;
+  --brass-hi: #d9ac62;
+  --brass-lo: #8a6427;
+  --ink: #1c1815;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+    Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
+}
 
 body {
   width: 380px;
-  max-height: 520px;
-  background: #1c1815;
-  color: #f4ecd8;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 280px;
+  max-height: 580px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  background: var(--bg)
+    radial-gradient(120% 55% at 50% 0%, rgba(184, 132, 59, 0.08), transparent 70%);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
 }
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(184, 132, 59, 0.45);
+  color: #fff;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--brass-hi);
+  outline-offset: 2px;
+}
+
+/* ---------- Header ---------- */
 
 header {
+  flex: none;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: #231e1a;
-  border-bottom: 2px dashed #3d3228;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px 10px 12px;
+  background: linear-gradient(180deg, #27201a, #201a15);
+  border-bottom: 2px dashed var(--line);
 }
 
-.brand { 
-  display: flex; 
-  align-items: center; 
+/* The PNG is a 1024x1024 canvas with transparent padding.
+   This crops the box to the drawn artwork (x 40-984, y 300-676)
+   so the banner uses its full width instead of shrinking to a speck. */
+.brand {
+  position: relative;
+  flex: none;
+  width: 172px;
+  aspect-ratio: 944 / 376;
+  overflow: hidden;
 }
 
 .header-art {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
+  position: absolute;
   display: block;
+  max-width: none;
+  width: 108.47%;
+  height: auto;
+  left: -4.24%;
+  top: -79.79%;
+  user-select: none;
 }
 
-.actions { display: flex; gap: 6px; }
+.actions {
+  display: flex;
+  gap: 6px;
+}
 
 .actions button {
-  background: #2c241d;
-  color: #c7b8a4;
-  border: 1px solid #473a2e;
-  border-radius: 5px;
-  padding: 4px 9px;
-  font-size: 11px;
-  cursor: pointer;
+  background: linear-gradient(180deg, #2f261e, #261f18);
+  color: var(--brass-hi);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 
-.actions button:hover { 
-  background: #3b3026; 
-  color: #fff; 
-  border-color: #d4a359; 
+.actions button:hover {
+  background: #352a20;
+  color: var(--text-strong);
+  border-color: var(--brass);
 }
 
-.controls { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+/* ---------- Search + filters ---------- */
 
+.controls {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 10px;
+}
+
+/* Recessed, like a slot cut into the paper */
 #searchInput {
   width: 100%;
-  padding: 8px 11px;
-  border-radius: 6px;
-  border: 1px solid #473a2e;
-  background: #26201b;
-  color: #f4ecd8;
-  font-size: 12.5px;
+  padding: 9px 12px;
+  background: var(--bg-well);
+  color: var(--text-strong);
+  font-size: 13px;
+  border: 1px solid #0d0a08;
+  border-bottom-color: rgba(255, 226, 170, 0.1);
+  border-radius: 5px;
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(255, 226, 170, 0.07);
   outline: none;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-#searchInput:focus { border-color: #d4a359; }
+#searchInput::placeholder {
+  color: var(--faint);
+  font-style: italic;
+}
 
-.tabs-filter { display: flex; gap: 6px; }
+#searchInput:focus {
+  border-color: var(--brass);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.7),
+    0 0 0 2px rgba(217, 172, 98, 0.25);
+}
+
+.tabs-filter {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px dashed var(--line-soft);
+}
 
 .filter-btn {
   background: transparent;
-  color: #9c8e7b;
-  border: none;
-  font-size: 11.5px;
-  font-weight: 500;
-  padding: 3px 9px;
-  border-radius: 4px;
-  cursor: pointer;
+  color: var(--muted);
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 4px 10px 6px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: color 0.15s, border-color 0.15s;
 }
 
-.filter-btn.active { 
-  background: #33281f; 
-  color: #f4ecd8; 
-  border: 1px solid #4a3c2f; 
+.filter-btn:hover {
+  color: var(--text);
 }
+
+.filter-btn.active {
+  color: var(--brass-hi);
+  border-bottom-color: var(--brass);
+}
+
+/* ---------- Ledger list ---------- */
 
 .tab-list {
-  padding: 0 16px 12px;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
-  max-height: 340px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 4px 16px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* Without this, flex squashes the cards instead of letting the list scroll */
+.tab-list > * {
+  flex: none;
+}
+
+@supports not (scrollbar-width: thin) {
+  .tab-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  .tab-list::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 4px;
+  }
 }
 
 .tab-card {
-  background: #251f1a;
-  border: 1px solid #3d3228;
-  border-radius: 7px;
-  padding: 9px 11px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  padding: 9px 10px 9px 12px;
+  background: var(--bg-card);
+  border: 1px dashed var(--line);
+  border-left: 3px solid var(--brass-lo);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.tab-card:hover { border-color: #b8843b; background: #2b241e; }
+.tab-card:hover {
+  background: #2c241d;
+  border-color: var(--brass);
+}
 
-.tab-meta { overflow: hidden; flex: 1; }
+/* Pinned entries get a brighter brass spine (needs :has, all current browsers) */
+.tab-card:has(.pin-btn.pinned) {
+  border-left-color: var(--brass-hi);
+  background: #2a2218;
+}
+
+.tab-meta {
+  flex: 1;
+  min-width: 0;
+}
 
 .tab-title {
-  font-size: 12.5px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-strong);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #f9f4ec;
 }
 
-.tab-sub { font-size: 10.5px; color: #9c8e7b; margin-top: 3px; }
+.tab-sub {
+  margin-top: 3px;
+  font-size: 10.5px;
+  font-style: italic;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-.card-btns { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.card-btns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
 
 .icon-btn {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #2c241d;
-  border: 1px solid #473a2e;
-  color: #c7b8a4;
-  border-radius: 5px;
-  padding: 4px 8px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px;
   font-size: 11px;
-  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
 }
 
-.icon-btn.pinned { 
-  color: #e5b567; 
-  border-color: #8a6427; 
-  background: #33281b; 
+.icon-btn:hover {
+  color: var(--text-strong);
+  border-color: var(--brass);
 }
 
+.icon-btn.pinned {
+  color: #e8b96b;
+  border-color: var(--brass-lo);
+  background: #33281b;
+}
+
+.del-btn:hover {
+  color: #e09a86;
+  border-color: #8a4a3a;
+}
+
+/* Warm brass, like a stationery clasp */
 .restore-btn {
-  background: #b8843b;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  font-size: 11px;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  background: linear-gradient(180deg, #d4a359 0%, #b8843b 55%, #a2722f 100%);
+  color: var(--ink);
+  border: 1px solid #7a5622;
+  border-radius: 4px;
+  padding: 5px 11px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 236, 190, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
-.restore-btn:hover { background: #9e6f2e; }
+.restore-btn:hover {
+  filter: brightness(1.08);
+}
 
+.restore-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Empty state ---------- */
+
+/* popup.js renders: <div class="empty">message</div>
+   The art is drawn by ::before, cropped to the illustration
+   (x 70-954, y 250-910 of the 1024px PNG), message stays visible below. */
 .empty {
-  background: url("icons/empty-vault.png") no-repeat center center;
-  background-size: 210px auto;
-  min-height: 180px;
-  font-size: 0;
-  color: transparent;
-  margin: 10px 0;
+  --w: 230px;
+  padding: 4px 12px 6px;
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--muted);
 }
+
+.empty::before {
+  content: "";
+  display: block;
+  width: var(--w);
+  aspect-ratio: 884 / 660;
+  margin: 0 auto 10px;
+  background-image: url("icons/empty-vault.png");
+  background-repeat: no-repeat;
+  background-size: calc(var(--w) * 1024 / 884) auto;
+  background-position: calc(var(--w) * -70 / 884) calc(var(--w) * -250 / 884);
+}
+
+/* ---------- Footer ---------- */
 
 footer {
-  padding: 10px 16px;
-  border-top: 2px dashed #3d3228;
-  background: #231e1a;
-  font-size: 10.5px;
-  color: #9c8e7b;
+  flex: none;
   display: flex;
   justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg-raised);
+  border-top: 2px dashed var(--line);
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
