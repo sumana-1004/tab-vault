@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "description": "Never lose an important tab again. Automatically vaults closed tabs with instant search, pinning, and one-click restore.",
   "icons": {
-    "48": "icons/icon.svg",
-    "128": "icons/icon.svg"
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
   },
   "permissions": ["tabs", "storage"],
   "background": {
@@ -14,7 +15,12 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Open Tab Vault"
+    "default_title": "Open Tab Vault",
+    "default_icon": {
+      "16": "icons/icon.png",
+      "32": "icons/icon.png",
+      "48": "icons/icon.png"
+    }
   },
   "browser_specific_settings": {
     "gecko": {
