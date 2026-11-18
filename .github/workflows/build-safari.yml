@@ -13,10 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Stage clean extension files
-        run: |
-          mkdir -p ext_src
-          cp -r manifest.json background.js popup.html popup.css popup.js icons ext_src/
+      - name: Accept Xcode License Automatically
+        run: sudo xcodebuild -license accept
 
       - name: Convert WebExtension to Safari macOS App
         run: |
@@ -27,8 +25,7 @@ jobs:
             --bundle-identifier "io.github.sumana1004.tabvault" \
             --macos-only \
             --no-open \
-            --no-prompt \
-            ext_src
+            .
 
       - name: Build Unsigned macOS App
         run: |
