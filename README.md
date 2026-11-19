@@ -79,5 +79,3 @@ tab-vault/
 ## Feedback & Contributions
 
 Suggestions, bug reports, and pull requests are welcome. If you spot an edge case across browsers or have ideas to make everyday tab recovery smoother, feel free to open an issue.
-
-```
