@@ -13,7 +13,7 @@ We have all closed a tab mid-thought—right in the middle of reading documentat
 - **Permanent Pinning (`★`):** Pin important tabs so they stay at the top and are protected when clearing unpinned entries.
 - **Real-Time Search & Filtering:** Filter between **All** and **Pinned** tabs and search by page title or URL as you type.
 - **Local-First Privacy:** Stores data locally in `browser.storage.local` with one-click JSON export—no external servers, accounts, or tracking.
-- **Handcrafted UI & Custom Artwork:** Styled with a dark-academia, analog-stationery palette and custom-illustrated Procreate assets (`icon.png`, `header-banner.png`, and `empty-vault.png`).
+- **Handcrafted UI & Custom Artwork:** Styled with a dark-academia, analog-stationery palette and custom hand-illustrated Procreate assets (`icon.png`, `header-banner.png`, and `empty-vault.png`).
 
 ---
 
@@ -72,14 +72,12 @@ tab-vault/
 
 * **Manifest V3 Architecture:** Built around MV3 conventions with background event listeners and local storage persistence so the extension remains lightweight and compatible across Chromium browsers and Safari's web extension bridge.
 * **Relative Asset Pathing:** Extension popups and stylesheets resolve bundled assets relative to the extension package (`icons/header-banner.png`, `icons/empty-vault.png`), avoiding broken paths across packaged builds.
-* **Safari Local Signing Behavior:** On macOS, locally built or unsigned Safari extensions require re-enabling unsigned extension permissions across browser restarts unless signed with an active Apple Developer certificate—a known macOS security constraint documented here so contributors know what to expect during local testing.
+* **Safari Local Signing Behaviour:** On macOS, locally built or unsigned Safari extensions require re-enabling unsigned extension permissions across browser restarts unless signed with an active Apple Developer certificate—a known macOS security constraint documented here so contributors know what to expect during local testing.
 
 ---
 
 ## Feedback & Contributions
 
 Suggestions, bug reports, and pull requests are welcome. If you spot an edge case across browsers or have ideas to make everyday tab recovery smoother, feel free to open an issue.
-
-```
 
 ```
