@@ -30,9 +30,10 @@ jobs:
       - name: Build Unsigned macOS App
         run: |
           PROJ_PATH=$(find build_out -name "*.xcodeproj" | head -n 1)
+          test -n "$PROJ_PATH"
           xcodebuild \
             -project "$PROJ_PATH" \
-            -alltargets \
+            -scheme "Tab Vault" \
             -configuration Release \
             -derivedDataPath build_out/derived \
             CODE_SIGN_IDENTITY="" \
