@@ -76,13 +76,29 @@ filterBtns.forEach((btn) => {
   };
 });
 
-document.getElementById("exportBtn").onclick = () => {
-  const blob = new Blob([JSON.stringify(vault, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "tab-vault-backup.json";
-  a.click();
+document.getElementById("exportBtn").onclick = async () => {
+  const jsonText = JSON.stringify(vault, null, 2);
+  const dataUrl =
+    "data:application/json;charset=utf-8," + encodeURIComponent(jsonText);
+
+  try {
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = `tab-vault-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch (err) {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(jsonText);
+      const btn = document.getElementById("exportBtn");
+      const originalText = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 1500);
+    }
+  }
 };
 
 document.getElementById("clearBtn").onclick = () => {
