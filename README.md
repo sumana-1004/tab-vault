@@ -3,6 +3,7 @@
 A quiet, privacy-first browser extension (Manifest V3) that saves recently closed tabs with open-duration tracking, instant search, pinning, and JSON export—across **Chrome, Edge, Brave, Arc, and Safari**.
 
 We have all closed an age-old tab--that has been there since the dawn of time--mid-thought. like just immediately and suddenly. right in the middle of reading documentation, comparing notes, or chasing down a research thread—and we have had to hunt through age-old extensive browser history to find it again. 
+
 **Tab Vault** is built to keep those moments easy to recover without adding clutter, accounts, or background bloat.
 
 ---
