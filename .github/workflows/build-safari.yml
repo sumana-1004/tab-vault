@@ -2,7 +2,7 @@ name: Build Safari macOS Extension
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -18,9 +18,10 @@ jobs:
 
       - name: Convert WebExtension to Safari macOS App
         run: |
-          mkdir -p build_out
+          rm -rf /tmp/build_out
+          mkdir -p /tmp/build_out
           xcrun safari-web-extension-converter \
-            --project-location build_out \
+            --project-location /tmp/build_out \
             --app-name "Tab Vault" \
             --bundle-identifier "io.github.sumana1004.tabvault" \
             --macos-only \
@@ -30,21 +31,21 @@ jobs:
 
       - name: Build Unsigned macOS App
         run: |
-          PROJ_PATH=$(find build_out -name "*.xcodeproj" | head -n 1)
+          PROJ_PATH=$(find /tmp/build_out -name "*.xcodeproj" | head -n 1)
           xcodebuild \
             -project "$PROJ_PATH" \
             -scheme "Tab Vault" \
             -configuration Release \
             -sdk macosx \
             -destination 'generic/platform=macOS' \
-            -derivedDataPath build_out/derived \
+            -derivedDataPath /tmp/build_out/derived \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
       - name: Package App into Zip
         run: |
-          APP_PATH=$(find build_out/derived -name "Tab Vault.app" | head -n 1)
+          APP_PATH=$(find /tmp/build_out/derived -name "Tab Vault.app" | head -n 1)
           APP_DIR=$(dirname "$APP_PATH")
           cd "$APP_DIR"
           zip -r "$GITHUB_WORKSPACE/Tab-Vault-macOS-Safari.zip" "Tab Vault.app"
