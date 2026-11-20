@@ -2,7 +2,7 @@ name: Build Safari macOS Extension
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -35,6 +35,8 @@ jobs:
             -project "$PROJ_PATH" \
             -scheme "Tab Vault" \
             -configuration Release \
+            -sdk macosx \
+            -destination 'generic/platform=macOS' \
             -derivedDataPath build_out/derived \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
