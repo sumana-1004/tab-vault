@@ -32,6 +32,7 @@ jobs:
       - name: Build Unsigned macOS App
         run: |
           PROJ_PATH=$(find /tmp/build_out -name "*.xcodeproj" | head -n 1)
+          sed -i '' 's/io\.github\.sumana1004\.tabvault/io.github.sumana1004.Tab-Vault/g' "$PROJ_PATH/project.pbxproj"
           xcodebuild \
             -project "$PROJ_PATH" \
             -scheme "Tab Vault" \
